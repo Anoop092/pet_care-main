@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import { CheckoutWizard, Layout } from "../components";
 import { useGlobalContext } from "../utils/Store";
 import Link from "next/link";
