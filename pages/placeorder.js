@@ -38,15 +38,24 @@ const PlaceOrderScreen = () => {
     try {
       setLoading(true);
       const { data } = await axios.post(
-        "/api/order",
+        "/api/orders",
         {
           orderItems: cartItems.map((x) => ({
             ...x,
             countInStock: undefined,
+            image: urlForThumbnail(x.image),
             slug: undefined,
+            _createdAt: undefined,
+
+            _rev: undefined,
+            _type: undefined,
+            _updatedAt: undefined,
+            breed: undefined,
+            category: undefined,
+            sex: undefined,
           })),
           shippingAddress,
-          payment,
+          paymentMethod: payment,
           shippingPrice,
           itemsPrice,
           taxPrice,
@@ -55,7 +64,9 @@ const PlaceOrderScreen = () => {
         { headers: { authorization: `Bearer ${userInfo.token}` } }
       );
       setLoading(false);
+
       dispatch({ type: "CART_CLEAR_ITEMS" });
+
       Cookies.set(
         "cart",
         JSON.stringify({

@@ -11,7 +11,9 @@ export default function reducer(state, action) {
             item._id === existingItem._id ? newItem : item
           )
         : [...state.cart.cartItems, newItem];
-      Cookies.set("cart", JSON.stringify({ ...state.cart, cartItems }));
+      Cookies.set("cart", JSON.stringify({ ...state.cart, cartItems }), {
+        expires: 7,
+      });
 
       return { ...state, cart: { ...state.cart, cartItems } };
     }

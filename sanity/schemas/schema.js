@@ -7,6 +7,10 @@ import schemaTypes from "all:part:@sanity/base/schema-type";
 // Then we give our schema to the builder and provide the result to Sanity
 import animals from "./animals";
 import users from "./users";
+import orders from "./orders";
+import orderItems from "./orderItems";
+import paymentResults from "./paymentResults";
+import shippingAddress from "./shippingAddress";
 export default createSchema({
   // We name our schema
   name: "default",
@@ -16,5 +20,9 @@ export default createSchema({
     /* Your types here! */
     animals,
     users,
+    orders,
+    orderItems,
+    paymentResults,
+    shippingAddress,
   ]),
 });

@@ -32,7 +32,7 @@ const LoginScreen = () => {
       });
 
       dispatch({ type: "USER_LOGIN", payload: data });
-      Cookies.set("userInfo", JSON.stringify(data));
+      Cookies.set("userInfo", JSON.stringify(data), { expires: 7 });
       router.push(redirect || "/");
     } catch (error) {
       toast.error(getError(error));
