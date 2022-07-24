@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { getError } from "../utils/error";
 import axios from "axios";
 import dynamic from "next/dynamic";
+import jsCookie from "js-cookie";
 
 const PlaceOrderScreen = () => {
   const { state, dispatch } = useGlobalContext();
@@ -26,15 +27,16 @@ const PlaceOrderScreen = () => {
       router.push("/");
       return;
     }
-    if (cartItems.length === 0) {
-      router.push("/");
-      return;
-    }
-  }, [cartItems, payment, router]);
+    // if (cartItems.length === 0) {
+    //   router.push("/");
+    //   return;
+    // }
+  }, [payment, router]);
   const shippingPrice = itemsPrice > 200 ? 0 : 15;
   const taxPrice = round2(itemsPrice * 0.15);
   const totalPrice = round2(itemsPrice + shippingPrice + taxPrice);
   const placeOrderHandler = async () => {
+    let id;
     try {
       setLoading(true);
       const { data } = await axios.post(
@@ -67,13 +69,14 @@ const PlaceOrderScreen = () => {
 
       dispatch({ type: "CART_CLEAR_ITEMS" });
 
-      Cookies.set(
+      jsCookie.set(
         "cart",
         JSON.stringify({
           ...cart,
           cartItems: [],
         })
       );
+      console.log(data);
       router.push(`/order/${data}`);
     } catch (error) {
       setLoading(false);
@@ -182,7 +185,7 @@ const PlaceOrderScreen = () => {
               <li>
                 <button
                   disabled={loading}
-                  onClick={placeOrderHandler}
+                  onClick={() => placeOrderHandler()}
                   className="primary-button"
                 >
                   {loading ? "Loading..." : "Place Order"}

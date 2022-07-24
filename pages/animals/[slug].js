@@ -7,7 +7,7 @@ import Link from "next/link";
 const Detail = () => {
   const { query } = useRouter();
   const { slug } = query;
-  console.log(slug);
+
   const [state, setState] = useState({
     animal: "",
     loading: true,
@@ -25,7 +25,7 @@ const Detail = () => {
         );
 
         const animal = animals.find((item) => item.slug.current === slug);
-        console.log(animal);
+
         setState({ ...state, animal, loading: false });
       } catch (error) {
         setState({ ...state, err: error.message, loading: false });
