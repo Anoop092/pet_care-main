@@ -18,5 +18,15 @@ export default {
       name: "email_address",
       type: "string",
     },
+    {
+      title: "razor_order_id",
+      name: "razor_order_id",
+      type: "string",
+    },
+    {
+      title: "razor_signature",
+      name: "razor_signature",
+      type: "string",
+    },
   ],
 };

@@ -2,8 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { CurrencyRupeeIcon } from "@heroicons/react/outline";
+import { PayPalButtons } from "@paypal/react-paypal-js";
 
-const Order = ({ order }) => {
+const Order = ({ order, makePayment }) => {
   const {
     shippingAddress,
     paymentMethod,
@@ -23,9 +24,9 @@ const Order = ({ order }) => {
         <div className="card  p-5">
           <h2 className="mb-2 text-lg">Shipping Address</h2>
           <div>
-            {shippingAddress.fullName}, {shippingAddress.address},{" "}
-            {shippingAddress.city}, {shippingAddress.postalCode},{" "}
-            {shippingAddress.country}
+            {shippingAddress?.fullName}, {shippingAddress?.address},{" "}
+            {shippingAddress?.city}, {shippingAddress?.postalCode},{" "}
+            {shippingAddress?.country}
           </div>
           {isDelivered ? (
             <div className="alert-success">Delivered at {deliveredAt}</div>
@@ -129,6 +130,16 @@ const Order = ({ order }) => {
                   <CurrencyRupeeIcon className="h-5 w-5"></CurrencyRupeeIcon>
                   {totalPrice}
                 </div>
+              </div>
+            </li>
+            <li>
+              <div className="w-full">
+                <button
+                  className="primary-button"
+                  onClick={() => makePayment()}
+                >
+                  RozarPay
+                </button>
               </div>
             </li>
           </ul>

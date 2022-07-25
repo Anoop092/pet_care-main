@@ -32,7 +32,7 @@ const Detail = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [slug, state]);
   return (
     <Layout title="details">
       {loading ? (
