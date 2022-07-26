@@ -2,7 +2,6 @@ import Link from "next/link";
 import React from "react";
 
 const OrderHistoryDetail = ({ orders }) => {
-  console.log(orders);
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full">
