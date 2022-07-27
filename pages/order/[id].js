@@ -5,12 +5,8 @@ import React, { useEffect, useReducer } from "react";
 import { Layout, Order } from "../../components";
 import { getError } from "../../utils/error";
 import { useGlobalContext } from "../../utils/Store";
-import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
-import { toast } from "react-toastify";
-import Image from "next/image";
-import Link from "next/link";
 
-import { CurrencyRupeeIcon } from "@heroicons/react/outline";
+import { toast } from "react-toastify";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -162,7 +158,7 @@ const OrderScreen = ({ params }) => {
 
 export function getServerSideProps(ctx) {
   const { params } = ctx;
-  console.log(params);
+
   return {
     props: {
       params,

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import { urlForThumbnail } from "../utils/image";
 import { useGlobalContext } from "../utils/Store";
@@ -34,6 +35,12 @@ const AnimalsList = ({ animal }) => {
           onClick={() => addToCartHandler(animal)}
         >
           Add to Cart
+        </button>
+        <button
+          className="w-full rounded-lg bg-orange-500 py-2 mt-2 text-white text-lg shadow outline-none hover:bg-orange-300 "
+          type="btn"
+        >
+          Buy Now
         </button>
       </div>
     </div>

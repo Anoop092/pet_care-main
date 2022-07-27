@@ -7,8 +7,10 @@ import "react-toastify/dist/ReactToastify.css";
 import { Menu } from "@headlessui/react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
+import { MenuIcon } from "@heroicons/react/outline";
 
 import DropdownLink from "./DropdownLink";
+import SearchButton from "./SearchButton";
 const Layout = ({ children, title }) => {
   const { state, dispatch } = useGlobalContext();
   const [count, setCount] = useState(0);
@@ -41,13 +43,17 @@ const Layout = ({ children, title }) => {
       <ToastContainer position="bottom-center" limit={1} />
       <div className="flex flex-col min-h-screen justify-between">
         <header>
-          <nav className=" flex h-12 shadow-md py-5 px-3 bg-blue-500 items-center justify-between">
+          <nav className=" flex h-12 shadow-md py-5 px-3 bg-blue-500 items-center justify-between ">
             <Link href="/">
-              <a className="text-xl text-white font-bold">PET ZONE</a>
+              <a className=" md:text-xl text-white font-bold">PET ZONE</a>
             </Link>
+            <div className="ml-2">
+              <SearchButton />
+            </div>
+
             <div>
               <Link href="/cart">
-                <a className="text-xl p-2 text-white">
+                <a className=" p-1  md:text-xl md:p-2 text-white ">
                   Cart
                   {count > 0 && (
                     <span className="ml-1 rounded-full bg-red-600 px-2 py-1 text-xs font-bold text-white">
@@ -86,7 +92,7 @@ const Layout = ({ children, title }) => {
                 </Menu>
               ) : (
                 <Link href="/login">
-                  <a className="text-xl p-2 text-white">Login</a>
+                  <a className="md:text-xl p-2 text-white sm:p-1 ">Login</a>
                 </Link>
               )}
             </div>

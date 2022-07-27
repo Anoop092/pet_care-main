@@ -1,45 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import React from "react";
+
 import client from "../../utils/client";
 import { AnimalDetails, Layout } from "../../components";
 import Link from "next/link";
 
-const Detail = () => {
-  const { query } = useRouter();
-  const { slug } = query;
-
-  const [state, setState] = useState({
-    animal: "",
-    loading: true,
-    err: "",
-  });
-  const { animal, loading, err } = state;
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const animals = await client.fetch(
-          `
-            *[_type=="animal" && slug.current == $slug ]
-            `,
-          { slug }
-        );
-
-        const animal = animals.find((item) => item.slug.current === slug);
-
-        setState({ ...state, animal, loading: false });
-      } catch (error) {
-        setState({ ...state, err: error.message, loading: false });
-      }
-    };
-    fetchData();
-  }, [slug, state]);
+const Detail = ({ animal }) => {
   return (
     <Layout title="details">
-      {loading ? (
-        <div>Loading..</div>
-      ) : err ? (
-        <div>there was error in fetching a data</div>
-      ) : animal ? (
+      {animal ? (
         <AnimalDetails animal={animal} />
       ) : (
         <div className="flex flex-col">
@@ -52,5 +20,20 @@ const Detail = () => {
     </Layout>
   );
 };
+export async function getServerSideProps(ctx) {
+  const { params } = ctx;
+  const { slug } = params;
+  const animal = await client.fetch(
+    `
+  *[_type=="animal" && slug.current == $slug ][0]
+  `,
+    { slug }
+  );
+  return {
+    props: {
+      animal: animal,
+    },
+  };
+}
 
 export default Detail;
