@@ -23,7 +23,12 @@ const handler = async (req, res) => {
       token,
     });
   } else {
-    res.status(401).send("please check your email and password");
+    if (user) {
+      res.status(401).send({ message: "please check your password " });
+      return;
+    } else {
+      res.status(401).send({ message: "user does not exists please register" });
+    }
   }
 };
 export default handler;
